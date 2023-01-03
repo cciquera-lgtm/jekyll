@@ -1,0 +1,19 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  creationTimestamp: null
+  name: developer-rolebinding
+  namespace: development
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: developer-role
+subjects:
+- apiGroup: rbac.authorization.k8s.io
+  kind: User
+  name: martin
+
+  kubectl config set-credentials martin --client-certificate ./martin.crt --client-key ./martin.key
+  kubectl config set-context developer --cluster kubernetes --user martin
+  kubectl config use-context developer
